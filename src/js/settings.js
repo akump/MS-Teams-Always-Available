@@ -6,6 +6,8 @@ const updateRequestCount = function () {
         const countElement = document.getElementById('count');
         if (requestCount) {
             countElement.innerHTML = requestCount;
+        } else {
+            countElement.innerHTML = 0;
         }
     });
 };
