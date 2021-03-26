@@ -13,5 +13,8 @@
   },
   "browser_action": {
     "default_popup": "src/html/settings.html"
-  }
+  },
+  "permissions": [
+    "storage"
+  ]
 }

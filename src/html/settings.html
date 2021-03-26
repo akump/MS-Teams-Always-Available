@@ -4,6 +4,8 @@
 <head>
     <title>MS Teams: Always Available</title>
     <meta charset="UTF-8">
+    <script src="../js/settings.js"></script>
+
     <style>
         body {
             background-color: #232323;
@@ -29,8 +31,9 @@
         <span>This chrome extension works by calling Microsoft's servers every 30 seconds. As long as you have a Chrome
             tab open and logged into https://teams.microsoft.com, this will work.</span>
         <br></br>
-        <span> Note: This will set your status as 'Available' no matter what even if you are in a meeting or get set to
-            do not disturb.</span>
+        <span> Forced availailibity count: <span id="count"></span></span>
+        <br></br>
+        <span> Note: This count should go up once every 30 seconds. If it doesn't then you most likely don't have a Teams tab open.</span>
     </div>
 </body>
 

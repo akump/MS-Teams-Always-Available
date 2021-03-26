@@ -6,6 +6,13 @@ const getAuthToken = function () {
   }
 };
 
+
+let count = 0;
+
+chrome.storage.sync.set({
+  requestCount: count
+}, function () {});
+
 const startForceAvailability = async function () {
   const response = await fetch('https://presence.teams.microsoft.com/v1/me/forceavailability/', {
     'headers': {
@@ -18,6 +25,12 @@ const startForceAvailability = async function () {
   console.group('MS Teams: Always Available');
   console.log(response);
   console.groupEnd();
+
+  count += 1;
+
+  chrome.storage.sync.set({
+    requestCount: count
+  }, function () {});
 };
 
 setInterval(startForceAvailability, 30 * 1000);
