@@ -8,12 +8,12 @@ const getAuthToken = function () {
 
 const startForceAvailability = async function () {
   const response = await fetch('https://presence.teams.microsoft.com/v1/me/forceavailability/', {
-    "headers": {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${getAuthToken()}`
+    'headers': {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${getAuthToken()}`
     },
-    "body": '{"availability":"Available"}',
-    "method": "PUT"
+    'body': '{"availability":"Available"}',
+    'method': 'PUT'
   });
   console.group('MS Teams: Always Available');
   console.log(response);
