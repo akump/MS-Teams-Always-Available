@@ -1,0 +1,26 @@
+{
+  "name": "ms-teams-always-available",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akump/MS-Teams-Always-Available.git"
+  },
+  "scripts": {
+    "build-extension": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "prettier": "prettier-airbnb-config",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.1.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "prettier-airbnb-config": "^1.0.0"
+  }
+}
