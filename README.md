@@ -4,7 +4,7 @@ This Chrome extension will keep your status as 'Available 🟢' 24/7
 
 ## Installation
 
-Download from the [Chrome Web Store]()
+Install from the [Chrome Web Store]()
 
 ## Love this Chrome Extension?
 
