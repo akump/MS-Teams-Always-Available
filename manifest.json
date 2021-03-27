@@ -11,6 +11,7 @@
     "16": "src/images/teamsIcon.png",
     "128": "src/images/teamsIcon.png"
   },
+  "content_security_policy": "script-src 'self' https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js; object-src 'self'",
   "browser_action": {
     "default_popup": "src/html/settings.html"
   },

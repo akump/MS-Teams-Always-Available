@@ -6,7 +6,6 @@ const getAuthToken = function () {
   }
 };
 
-
 let count = 0;
 
 chrome.storage.sync.set({

@@ -16,11 +16,38 @@
         }
 
         .main-container {
-            padding: 5px;
+            padding: 5px 5px 5px 10px;
         }
 
         .header {
+            color: #7B83EB;
             margin-top: 5px;
+        }
+        #teams-link:link {
+            color: #7B83EB;
+            background-color: transparent;
+            text-decoration: none;
+        }
+        #teams-link:visited {
+            color: #7B83EB;
+            background-color: transparent;
+            text-decoration: none;
+        }
+        #teams-link:hover {
+            color: #7B83EB;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+        #teams-link:active {
+            color: #7B83EB;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+        #coffee{
+            margin-bottom: 5px;;
+        }
+        .bmc-btn-container {
+            margin-bottom: 15px;;
         }
     </style>
 </head>
@@ -29,11 +56,13 @@
     <div class="main-container">
         <h2 class="header">MS Teams: Always Available</h2>
         <span>This chrome extension works by calling Microsoft's servers every 30 seconds. As long as you have a Chrome
-            tab open and logged into https://teams.microsoft.com, this will work.</span>
+            tab open and are logged into <a id="teams-link" href="https://teams.microsoft.com" target="_blank">https://teams.microsoft.com</a>, you will remain available.</span>
         <br></br>
-        <span> Forced availailibity count: <span id="count"></span></span>
+        <span> Forced availability count: <span id="count"></span></span>
         <br></br>
         <span> Note: This count should go up once every 30 seconds. If it doesn't then you most likely don't have a Teams tab open.</span>
+        <h2 class="header">Loving the extension?</h2>
+        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="akump" data-color="#7b83eb" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" ></script>
     </div>
 </body>
 
