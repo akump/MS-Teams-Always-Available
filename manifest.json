@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Microsoft Teams: Always Available",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Chrome extension that keeps you available on teams 24/7",
   "content_scripts": [{
     "matches": ["https://teams.microsoft.com/*"],
