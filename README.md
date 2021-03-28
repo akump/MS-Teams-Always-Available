@@ -4,7 +4,7 @@ This Chrome extension will keep your status as 'Available 🟢' 24/7
 
 ## Installation
 
-Install from the [Chrome Web Store]()
+Install from the [Chrome Web Store](https://chrome.google.com/webstore/detail/microsoft-teams-always-av/klbhkcdmilipmdaejfmhmphbdfiofoen?hl=en)
 
 ## Love this Chrome Extension?
 
