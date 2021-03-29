@@ -38,14 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkbox.checked) {
             chrome.storage.sync.set({
                 isEnabled: true
-            }, function () { });
+            }, () => { });
         } else {
             chrome.storage.sync.set({
                 isEnabled: false
-            }, function () { });
+            }, () => { });
         }
     });
-    chrome.storage.sync.get(['isEnabled'], async function (storage) {
+    chrome.storage.sync.get(['isEnabled'], async storage => {
         const {
             isEnabled
         } = storage;

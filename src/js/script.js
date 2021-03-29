@@ -13,7 +13,7 @@ chrome.storage.sync.set({
 }, () => { });
 
 const runForceAvailability = async function () {
-  chrome.storage.sync.get(['isEnabled'], async function (storage) {
+  chrome.storage.sync.get(['isEnabled'], async storage => {
     const {
       isEnabled
     } = storage;
