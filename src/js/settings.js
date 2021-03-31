@@ -38,17 +38,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkbox.checked) {
             chrome.storage.sync.set({
                 isEnabled: true
-            }, () => { });
+            }, () => {});
         } else {
             chrome.storage.sync.set({
                 isEnabled: false
-            }, () => { });
+            }, () => {});
         }
     });
     chrome.storage.sync.get(['isEnabled'], async storage => {
         const {
             isEnabled
         } = storage;
-        checkbox.checked = isEnabled;
+
+        // handle use case where extension was just installed
+        if (isEnabled === undefined) {
+            chrome.storage.sync.set({
+                isEnabled: true
+            }, () => {});
+            checkbox.checked = true;
+        } else {
+            checkbox.checked = isEnabled;
+        }
+
     });
 });
