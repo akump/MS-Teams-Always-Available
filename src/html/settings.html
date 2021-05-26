@@ -50,12 +50,10 @@
 
         #coffee {
             margin-bottom: 5px;
-            ;
         }
 
         .bmc-btn-container {
             margin-bottom: 15px;
-            ;
         }
 
         .switch {
@@ -120,27 +118,52 @@
         #saved-text {
             margin-left: 5px;
         }
+
+        .section {
+            border-bottom: 1px solid rgb(88, 88, 88);
+        }
+
     </style>
 </head>
 
 <body>
     <div class="main-container">
-        <h2 class="header">MS Teams: Always Available</h2>
-        <span>This chrome extension works by calling Microsoft's servers every 30 seconds. As long as you have a Chrome
-            tab open and are logged into <a id="teams-link" href="https://teams.microsoft.com"
-                target="_blank">https://teams.microsoft.com</a>, you will remain available.</span>
-        <br></br>
-        <h2 class="header">Enabled?</h2>
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-        </label>
-        <span id="saved-text"></span>
-        <br></br>
-        <span> Forced availability count: <span id="count"></span></span>
-        <br></br>
-        <span> Note: This count should go up once every 30 seconds. If it doesn't then you most likely don't have a
-            Teams tab open.</span>
+        <div class="section">
+            <h2 class="header">MS Teams: Always Available</h2>
+            <span>This chrome extension works by calling Microsoft's servers every 30 seconds. As long as you have a Chrome
+                tab open and are logged into <a id="teams-link" href="https://teams.microsoft.com"
+                    target="_blank">https://teams.microsoft.com</a>, you will remain available.</span>
+            <br></br>
+        </div>
+
+        <div class="section">
+            <h2 class="header">Enabled?</h2>
+            <label class="switch">
+                <input type="checkbox" checked>
+                <span class="slider round"></span>
+            </label>
+            <span id="saved-text"></span>
+            <br></br>
+        </div>
+
+        <div class="section">
+            <h2 class="header">Set status as... </h2>
+            <input type="checkbox" id="StatusCheck0" value="Value1"/> Available 🟢
+            <br></br>
+            <input type="checkbox" id="StatusCheck1" value="Value1"/> Busy 🔴
+            <br></br>
+            <span>A page refresh may be needed after changing this value!</span>
+            <br></br>
+        </div>
+
+        <div class="section">
+            <h2 class="header">Is the extension working?</h2>
+            <span> Forced availability count: <span id="count"></span></span>
+            <br></br>
+            <span> Note: This count should go up once every 30 seconds.</span>
+            <br></br>
+        </div>
+
         <h2 class="header">Loving the extension?</h2>
         <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js"
             data-name="bmc-button" data-slug="akump" data-color="#7b83eb" data-emoji="" data-font="Cookie"
