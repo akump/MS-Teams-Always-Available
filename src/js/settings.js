@@ -27,7 +27,7 @@ const updateRequestCount = function () {
     });
 };
 
-setInterval(updateRequestCount, 15 * 1000);
+setInterval(updateRequestCount, 30 * 1000);
 updateRequestCount();
 
 let queued = false;
