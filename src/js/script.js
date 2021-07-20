@@ -10,13 +10,6 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     }
 });
 
-
-let count = 0;
-
-chrome.storage.sync.set({
-    requestCount: count
-}, () => {});
-
 const runForceAvailability = async function () {
     chrome.tabs.query({
         'url': 'https://teams.microsoft.com/*'
@@ -38,13 +31,21 @@ const runForceAvailability = async function () {
 
 const requestForceAvailability = function () {
     chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount'], async storage => {
-        const {
+        let {
             isEnabled,
             statusType,
             requestCount
         } = storage;
-        count = requestCount;
-        console.log("count: " + count);
+        if (requestCount === undefined) {
+            chrome.storage.sync.set({
+                requestCount: 0
+            }, () => {});
+            requestCount = 0;
+        }
+        if (requestCount > 100000) {
+            requestCount = 1;
+        }
+        console.log("count: " + requestCount);
         console.log("status: " + statusType);
 
         if (!statusType) {
@@ -70,10 +71,10 @@ const requestForceAvailability = function () {
                 });
 
                 if (response.ok) {
-                    count += 1;
+                    requestCount += 1;
 
                     chrome.storage.sync.set({
-                        requestCount: count
+                        requestCount: requestCount
                     }, () => {});
                 }
                 console.log('MS Teams Always Available:');
