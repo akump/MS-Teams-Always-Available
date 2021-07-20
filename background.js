@@ -1,5 +1,5 @@
 try {
-  importScripts("src/js/script.js");
+    importScripts("src/js/script.js");
 } catch (e) {
-  console.error(e);
+    console.error(e);
 }
