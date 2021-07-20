@@ -1,21 +1,25 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Microsoft Teams: Always Available",
   "version": "1.1.3",
   "description": "A Chrome extension that keeps you available on teams 24/7",
-  "content_scripts": [{
-    "matches": ["https://teams.microsoft.com/*"],
-    "js": ["src/js/script.js"]
-  }],
+  "background": {
+    "service_worker": "background.js"
+  },
   "icons": {
     "16": "src/images/teamsIcon.png",
     "128": "src/images/teamsIcon.png"
   },
-  "content_security_policy": "script-src 'self' https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js; object-src 'self'",
-  "browser_action": {
+  "action": {
     "default_popup": "src/html/settings.html"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "alarms",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.teams.microsoft.com/*"
   ]
 }
