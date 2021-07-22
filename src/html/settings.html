@@ -22,6 +22,7 @@
         .header {
             color: #7B83EB;
             margin-top: 5px;
+            margin-bottom: 5px;
         }
 
         #teams-link:link {
@@ -123,6 +124,19 @@
             border-bottom: 1px solid rgb(88, 88, 88);
         }
 
+        .reset-count {
+            background-color: #7B83EB;
+            border: none;
+            color: white;
+            padding: 7px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 0px 4px 4px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
     </style>
 </head>
 
@@ -130,7 +144,8 @@
     <div class="main-container">
         <div class="section">
             <h2 class="header">MS Teams: Always Available</h2>
-            <span>This chrome extension works by calling Microsoft's servers every 30 seconds. As long as you have a Chrome
+            <span>This chrome extension works by calling Microsoft's servers every 30 seconds. As long as you have a
+                Chrome
                 tab open and are logged into <a id="teams-link" href="https://teams.microsoft.com"
                     target="_blank">https://teams.microsoft.com</a>, you will remain available.</span>
             <br></br>
@@ -148,9 +163,9 @@
 
         <div class="section">
             <h2 class="header">Set status as... </h2>
-            <input type="checkbox" id="StatusCheck0" value="Value1"/> Available 🟢
+            <input type="checkbox" id="StatusCheck0" value="Value1" /> Available 🟢
             <br></br>
-            <input type="checkbox" id="StatusCheck1" value="Value1"/> Busy 🔴
+            <input type="checkbox" id="StatusCheck1" value="Value1" /> Busy 🔴
             <br></br>
             <span>A page refresh may be needed after changing this value!</span>
             <br></br>
@@ -159,16 +174,16 @@
         <div class="section">
             <h2 class="header">Is the extension working?</h2>
             <span> Forced availability count: <span id="count"></span></span>
-            <br></br>
-            <span> Note: This count should go up once every 30 seconds.</span>
+            <button class="reset-count" id="resetCount">Reset count</button>
+            <br />
+            <span> Note: This count should go up once every ~30 seconds.</span>
             <br></br>
         </div>
 
         <h2 class="header">Loving the extension?</h2>
-        <script type="text/javascript" src="../js/button.prod.min.js"
-            data-name="bmc-button" data-slug="akump" data-color="#7b83eb" data-emoji="" data-font="Cookie"
-            data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000"
-            data-coffee-color="#FFDD00"></script>
+        <script type="text/javascript" src="../js/button.prod.min.js" data-name="bmc-button" data-slug="akump"
+            data-color="#7b83eb" data-emoji="" data-font="Cookie" data-text="Buy me a coffee"
+            data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00"></script>
     </div>
 </body>
 

@@ -42,9 +42,6 @@ const requestForceAvailability = function () {
             }, () => {});
             requestCount = 0;
         }
-        if (requestCount > 100000) {
-            requestCount = 1;
-        }
         console.log("count: " + requestCount);
         console.log("status: " + statusType);
 

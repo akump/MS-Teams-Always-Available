@@ -13,6 +13,14 @@ const selectOnlyThis = function (e) {
     }, () => {});
 };
 
+const resetCount = function () {
+    chrome.storage.sync.set({
+        requestCount: 0
+    }, () => {
+        updateRequestCount();
+    });
+}
+
 const updateRequestCount = function () {
     chrome.storage.sync.get(['requestCount'], function (storage) {
         const {
@@ -27,12 +35,14 @@ const updateRequestCount = function () {
     });
 };
 
-setInterval(updateRequestCount, 30 * 1000);
+setInterval(updateRequestCount, 10 * 1000);
 updateRequestCount();
 
 let queued = false;
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("resetCount").addEventListener("click", resetCount);
+
     const checkbox = document.querySelector('input[type="checkbox"]');
 
     checkbox.addEventListener('change', () => {
