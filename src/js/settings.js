@@ -1,10 +1,11 @@
 const idToStatus = {
     'StatusCheck0': 'Available',
-    'StatusCheck1': 'Busy'
+    'StatusCheck1': 'Away',
+    'StatusCheck2': 'Busy'
 };
 
 const selectOnlyThis = function (e) {
-    for (let i = 0; i <= 1; i++) {
+    for (let i = 0; i <= 2; i++) {
         document.getElementById(`StatusCheck${i}`).checked = false;
     }
     document.getElementById(e.currentTarget.id).checked = true;
@@ -88,9 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const availableStatusElement = document.getElementById("StatusCheck0");
-    const busyStatusElement = document.getElementById("StatusCheck1");
+    const awayStatusElement = document.getElementById("StatusCheck1");
+    const busyStatusElement = document.getElementById("StatusCheck2");
 
     availableStatusElement.addEventListener("click", selectOnlyThis);
+    awayStatusElement.addEventListener("click", selectOnlyThis);
     busyStatusElement.addEventListener("click", selectOnlyThis);
 
     chrome.storage.sync.get(['statusType'], async storage => {
@@ -107,13 +110,20 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             if (statusType === 'Available') {
                 availableStatusElement.checked = true;
+                awayStatusElement.checked = false;
                 busyStatusElement.checked = false;
+            } else if (statusType === 'Away') {
+                awayStatusElement.checked = true;
+                busyStatusElement.checked = false;
+                availableStatusElement.checked = false;
             } else if (statusType === 'Busy') {
                 busyStatusElement.checked = true;
+                awayStatusElement.checked = false;
                 availableStatusElement.checked = false;
             } else {
                 availableStatusElement.checked = true;
                 busyStatusElement.checked = false;
+                awayStatusElement.checked = false;
             }
         }
     });
