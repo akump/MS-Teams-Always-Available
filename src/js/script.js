@@ -12,17 +12,17 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 const runForceAvailability = async function () {
     chrome.tabs.query({
-        'url': 'https://teams.microsoft.com/*'
+        'url': ['https://teams.microsoft.com/*', 'https://teams.microsoft.com.mcas.ms/*']
     }, function (items) {
         for (tab of items) {
             console.log("tab found: " + tab.url);
             chrome.scripting.executeScript({
-                    target: {
-                        tabId: tab.id
-                    },
-                    function: requestForceAvailability
+                target: {
+                    tabId: tab.id
                 },
-                () => {}
+                function: requestForceAvailability
+            },
+                () => { }
             );
             break;
         }
@@ -39,7 +39,7 @@ const requestForceAvailability = function () {
         if (requestCount === undefined) {
             chrome.storage.sync.set({
                 requestCount: 0
-            }, () => {});
+            }, () => { });
             requestCount = 0;
         }
         console.log("count: " + requestCount);
@@ -48,7 +48,7 @@ const requestForceAvailability = function () {
         if (!statusType) {
             chrome.storage.sync.set({
                 statusType: 'Available'
-            }, () => {});
+            }, () => { });
             statusType === 'Available';
         }
 
@@ -72,7 +72,7 @@ const requestForceAvailability = function () {
 
                     chrome.storage.sync.set({
                         requestCount: requestCount
-                    }, () => {});
+                    }, () => { });
                 }
                 console.log('MS Teams Always Available:');
                 console.log(response);
