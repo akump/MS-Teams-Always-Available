@@ -20,7 +20,6 @@
         "gulp-zip": "^5.1.0"
     },
     "devDependencies": {
-        "eslint": "^8.6.0",
         "prettier": "^1.19.1",
         "prettier-airbnb-config": "^1.0.0"
     }
