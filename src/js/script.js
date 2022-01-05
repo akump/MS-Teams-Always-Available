@@ -1,6 +1,6 @@
 chrome.runtime.onInstalled.addListener(async () => {
     chrome.alarms.create('forceTeamsAvailability', {
-        periodInMinutes: .5
+        periodInMinutes: .1
     });
 });
 
@@ -56,9 +56,9 @@ const requestForceAvailability = function () {
         }
 
         if (isEnabled || isEnabled === undefined) {
+            console.log(`startTime: ${startTime}`);
+            console.log(`endTime: ${endTime}`);
             if (onlyRunInTimeWindow && startTime && endTime) {
-                console.log(`startTime: ${startTime}`);
-                console.log(`endTime: ${endTime}`);
                 const currentDate = new Date();
                 const startDate = new Date(currentDate.getTime());
                 startDate.setHours(startTime.split(":")[0]);
