@@ -122,6 +122,7 @@
 
         .section {
             border-bottom: 1px solid rgb(88, 88, 88);
+            padding-bottom: 5px;
         }
 
         .reset-count {
@@ -137,6 +138,37 @@
             cursor: pointer;
             border-radius: 4px;
         }
+
+        .split-section {
+            display: flex;
+        }
+
+
+        .split-left {
+            padding-right: 10px;
+            margin-right: 10px;
+            border-right: 1px solid rgb(88, 88, 88);
+        }
+
+        .split-left.large {
+            flex: 1;
+        }
+
+        .split-left.small {
+            flex: .25;
+        }
+
+        .split-right {
+            flex: 1;
+        }
+
+        #timeWindowCheckbox {
+            margin-top: 10px;
+        }
+
+        #startTimeInput {
+            margin-top: 3px;
+        }
     </style>
 </head>
 
@@ -148,29 +180,47 @@
                 Chrome
                 tab open and are logged into <a id="teams-link" href="https://teams.microsoft.com"
                     target="_blank">https://teams.microsoft.com</a>, you will remain available.</span>
-            <br></br>
         </div>
 
         <div class="section">
-            <h2 class="header">Enabled?</h2>
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label>
-            <span id="saved-text"></span>
-            <br></br>
+            <div class="split-section">
+                <div class="split-left large">
+                    <h2 class="header">Set status as </h2>
+                    <input type="checkbox" class="option-checkbox" id="StatusCheck0" value="Value1" /> Available 🟢
+                    <br>
+                    <input type="checkbox" class="option-checkbox" id="StatusCheck1" value="Value1" /> Away 🟡
+                    <br>
+                    <input type="checkbox" class="option-checkbox" id="StatusCheck2" value="Value1" /> Busy 🔴
+                    <br>
+                    <span>Refresh(F5) after changing this</span>
+                </div>
+                <div class="split-right">
+                    <h2 class="header">Enabled?</h2>
+                    <label class="switch">
+                        <input id="enabledCheckbox" type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="saved-text"></span>
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <h2 class="header">Set status as... </h2>
-            <input type="checkbox" class="option-checkbox" id="StatusCheck0" value="Value1" /> Available 🟢
+            <h2 class="header">Time window to run extension</h2>
+            <span>You can choose to only run the extension in a certain time window. For example, if you only work from
+                8am - 4pm, input those times below and the extension will only work between those times. This allows
+                full automation of your availability. Otherwise, have this value unselected and the extension will work
+                as normal. </span>
             <br>
-            <input type="checkbox" class="option-checkbox" id="StatusCheck1" value="Value1" /> Away 🟡
+            <input type="checkbox" class="option-checkbox" id="timeWindowCheckbox" value="Value1" />
+            <span>Only run the extension between the following times</span>
             <br>
-            <input type="checkbox" class="option-checkbox" id="StatusCheck2" value="Value1" /> Busy 🔴
+            Start time:
+            <input type="time" id="startTimeInput" value="08:00">
+            End time:
+            <input type="time" id="endTimeInput" value="17:30">
             <br>
-            <span>A page refresh may be needed after changing this value!</span>
-            <br></br>
+            <strong> Make sure these values make sense! </strong>
         </div>
 
         <div class="section">
@@ -179,20 +229,22 @@
             <button class="reset-count" id="resetCount">Reset count</button>
             <br />
             <span> Note: This count should go up once every ~30 seconds.</span>
-            <br></br>
         </div>
 
-        <div class="section">
-            <h2 class="header">Found a bug?</h2>
-            <p> File bug reports <a id="teams-link"
-                    href="https://github.com/akump/MS-Teams-Always-Available/issues/new?assignees=akump&labels=&template=bug_report.md&title="
-                    target="_blank">here</a></p>
+        <div class="split-section" style="height: 100px;">
+            <div class="split-left large">
+                <h2 class="header">Loving the extension?</h2>
+                <script type="text/javascript" src="../js/button.prod.min.js" data-name="bmc-button" data-slug="akump"
+                    data-color="#7b83eb" data-emoji="" data-font="Cookie" data-text="Buy me a coffee"
+                    data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00"></script>
+            </div>
+            <div class="split-right">
+                <h2 class="header">Found a bug?</h2>
+                <p> File bug reports <a id="teams-link"
+                        href="https://github.com/akump/MS-Teams-Always-Available/issues/new?assignees=akump&labels=&template=bug_report.md&title="
+                        target="_blank">here.</a></p>
+            </div>
         </div>
-
-        <h2 class="header">Loving the extension?</h2>
-        <script type="text/javascript" src="../js/button.prod.min.js" data-name="bmc-button" data-slug="akump"
-            data-color="#7b83eb" data-emoji="" data-font="Cookie" data-text="Buy me a coffee"
-            data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00"></script>
     </div>
 </body>
 

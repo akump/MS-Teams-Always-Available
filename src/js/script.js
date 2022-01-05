@@ -1,10 +1,10 @@
 chrome.runtime.onInstalled.addListener(async () => {
     chrome.alarms.create('forceTeamsAvailability', {
-        periodInMinutes: 0.5
+        periodInMinutes: .1
     });
 });
 
-chrome.alarms.onAlarm.addListener((alarm) => {
+chrome.alarms.onAlarm.addListener(alarm => {
     if (alarm.name === 'forceTeamsAvailability') {
         runForceAvailability();
     }
@@ -17,12 +17,12 @@ const runForceAvailability = async function () {
         for (tab of items) {
             console.log("tab found: " + tab.url);
             chrome.scripting.executeScript({
-                    target: {
-                        tabId: tab.id
-                    },
-                    function: requestForceAvailability
+                target: {
+                    tabId: tab.id
                 },
-                () => {}
+                function: requestForceAvailability
+            },
+                () => { }
             );
             break;
         }
@@ -30,16 +30,19 @@ const runForceAvailability = async function () {
 }
 
 const requestForceAvailability = function () {
-    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount'], async storage => {
+    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow'], async storage => {
         let {
             isEnabled,
             statusType,
-            requestCount
+            requestCount,
+            startTime,
+            endTime,
+            onlyRunInTimeWindow
         } = storage;
         if (requestCount === undefined) {
             chrome.storage.sync.set({
                 requestCount: 0
-            }, () => {});
+            }, () => { });
             requestCount = 0;
         }
         console.log("count: " + requestCount);
@@ -48,11 +51,33 @@ const requestForceAvailability = function () {
         if (!statusType) {
             chrome.storage.sync.set({
                 statusType: 'Available'
-            }, () => {});
+            }, () => { });
             statusType === 'Available';
         }
 
         if (isEnabled || isEnabled === undefined) {
+            if (onlyRunInTimeWindow && startTime && endTime) {
+                console.log(`startTime: ${startTime}`);
+                console.log(`endTime: ${endTime}`);
+                const currentDate = new Date();
+                const startDate = new Date(currentDate.getTime());
+                startDate.setHours(startTime.split(":")[0]);
+                startDate.setMinutes(startTime.split(":")[1]);
+                startDate.setSeconds('00');
+
+                const endDate = new Date(currentDate.getTime());
+                endDate.setHours(endTime.split(":")[0]);
+                endDate.setMinutes(endTime.split(":")[1]);
+                endDate.setSeconds('00');
+                const isBetween = startDate < currentDate && endDate > currentDate;
+                if (!isBetween) {
+                    console.log('onlyRunInTimeWindow set to true and current time is not in inputted window');
+                    return;
+                } else {
+                    console.log('onlyRunInTimeWindow set to true and time is in window! Running force availability...')
+                }
+
+            }
             try {
                 const latestOid = localStorage['ts.latestOid'];
                 const tokenJSON = localStorage['ts.' + latestOid + '.cache.token.https://presence.teams.microsoft.com/'];
@@ -72,7 +97,7 @@ const requestForceAvailability = function () {
 
                     chrome.storage.sync.set({
                         requestCount: requestCount
-                    }, () => {});
+                    }, () => { });
                 }
                 console.log('MS Teams Always Available:');
                 console.log(response);
