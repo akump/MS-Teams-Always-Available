@@ -13,4 +13,4 @@ Install from the
 
 [Support me by buying me a coffee](https://www.buymeacoffee.com/akump) ☕
 
-![Alt text](src/images/example_store.png?raw=true 'Title')
+![Alt text](src/images/example_store_120.png?raw=true 'Title')
