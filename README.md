@@ -9,8 +9,4 @@ This Chrome extension will keep your status as 'Available 🟢' 24/7
 Install from the
 [Chrome Web Store](https://chrome.google.com/webstore/detail/microsoft-teams-always-av/klbhkcdmilipmdaejfmhmphbdfiofoen?hl=en)
 
-## Love this Chrome Extension?
-
-[Support me by buying me a coffee](https://www.buymeacoffee.com/akump) ☕
-
 ![Alt text](src/images/example_store_120.png?raw=true 'Title')

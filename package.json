@@ -16,7 +16,6 @@
     "license": "ISC",
     "dependencies": {
         "@types/chrome": "^0.0.133",
-        "extpay": "^3.0.0",
         "gulp": "^4.0.2",
         "gulp-zip": "^5.1.0"
     },

@@ -1,7 +1,7 @@
 
 chrome.runtime.onInstalled.addListener(async () => {
     chrome.alarms.create('forceTeamsAvailability', {
-        periodInMinutes: .5
+        periodInMinutes: .1
     });
 });
 
@@ -31,14 +31,15 @@ const runForceAvailability = async function () {
 }
 
 const requestForceAvailability = function () {
-    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow'], async storage => {
+    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow', 'paid'], async storage => {
         let {
             isEnabled,
             statusType,
             requestCount,
             startTime,
             endTime,
-            onlyRunInTimeWindow
+            onlyRunInTimeWindow,
+            paid
         } = storage;
         if (requestCount === undefined) {
             chrome.storage.sync.set({
@@ -55,10 +56,12 @@ const requestForceAvailability = function () {
             }, () => { });
             statusType === 'Available';
         }
+        if (!paid) {
+            console.log('User does not have an active subscription')
+            return;
+        }
 
-        const extpay = ExtPay('microsoft-teams-always-available');
-        const user = await extpay.getUser();
-        if (user.paid && (isEnabled || isEnabled === undefined)) {
+        if (isEnabled || isEnabled === undefined) {
             console.log(`startTime: ${startTime}`);
             console.log(`endTime: ${endTime}`);
             if (onlyRunInTimeWindow && startTime && endTime) {

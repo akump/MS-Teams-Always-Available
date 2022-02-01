@@ -7,7 +7,28 @@ const idToStatus = {
 
 const openPayment = function () {
     const extpay = ExtPay('microsoft-teams-always-available');
-    extpay.openPaymentPage()
+    extpay.openPaymentPage();
+};
+
+const runGetUserCallBack = function (user) {
+    chrome.storage.sync.set({
+        paid: user.paid
+    }, () => { });
+    const paymentStatusElement = document.getElementById('paymentStatus');
+    if (user.paid) {
+        paymentStatusElement.innerHTML = 'Subscription active ✅';
+    } else {
+        paymentStatusElement.innerHTML = 'Subscription Inactive ⛔︎';
+    }
+};
+
+const updatePaidStatus = function () {
+    const extpay = ExtPay('microsoft-teams-always-available');
+    extpay.getUser().then(user => {
+        runGetUserCallBack(user);
+    }).catch(() => {
+        document.getElementById('paymentStatus').innerHTML = 'Error loading payment status.';
+    });
 };
 
 const selectOnlyThis = function (e) {
@@ -26,7 +47,7 @@ const resetCount = function () {
     }, () => {
         updateRequestCount();
     });
-}
+};
 
 const updateRequestCount = function () {
     chrome.storage.sync.get(['requestCount'], function (storage) {
@@ -46,6 +67,7 @@ let queued = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     updateRequestCount();
+    updatePaidStatus();
     document.getElementById('resetCount').addEventListener('click', resetCount);
     document.getElementById('openPayment').addEventListener('click', openPayment);
 
