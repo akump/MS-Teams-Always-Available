@@ -16,9 +16,9 @@ const runGetUserCallBack = function (user) {
     }, () => { });
     const paymentStatusElement = document.getElementById('paymentStatus');
     if (user.paid) {
-        paymentStatusElement.innerHTML = 'Subscription active ✅';
+        paymentStatusElement.innerHTML = 'Subscription: active ✅';
     } else {
-        paymentStatusElement.innerHTML = 'Subscription Inactive ⛔︎';
+        paymentStatusElement.innerHTML = 'Subscription: inactive ⛔︎';
     }
 };
 
