@@ -1,6 +1,7 @@
+
 chrome.runtime.onInstalled.addListener(async () => {
     chrome.alarms.create('forceTeamsAvailability', {
-        periodInMinutes: .1
+        periodInMinutes: .5
     });
 });
 
@@ -55,7 +56,9 @@ const requestForceAvailability = function () {
             statusType === 'Available';
         }
 
-        if (isEnabled || isEnabled === undefined) {
+        const extpay = ExtPay('microsoft-teams-always-available');
+        const user = await extpay.getUser();
+        if (user.paid && (isEnabled || isEnabled === undefined)) {
             console.log(`startTime: ${startTime}`);
             console.log(`endTime: ${endTime}`);
             if (onlyRunInTimeWindow && startTime && endTime) {

@@ -4,6 +4,12 @@ const idToStatus = {
     'StatusCheck2': 'Busy'
 };
 
+
+const openPayment = function () {
+    const extpay = ExtPay('microsoft-teams-always-available');
+    extpay.openPaymentPage()
+};
+
 const selectOnlyThis = function (e) {
     for (let i = 0; i <= 2; i++) {
         document.getElementById(`StatusCheck${i}`).checked = false;
@@ -24,9 +30,7 @@ const resetCount = function () {
 
 const updateRequestCount = function () {
     chrome.storage.sync.get(['requestCount'], function (storage) {
-        const {
-            requestCount
-        } = storage;
+        const { requestCount } = storage;
         const countElement = document.getElementById('count');
         if (requestCount) {
             countElement.innerHTML = requestCount;
@@ -37,12 +41,13 @@ const updateRequestCount = function () {
 };
 
 setInterval(updateRequestCount, 10 * 1000);
-updateRequestCount();
 
 let queued = false;
 
 document.addEventListener('DOMContentLoaded', () => {
+    updateRequestCount();
     document.getElementById('resetCount').addEventListener('click', resetCount);
+    document.getElementById('openPayment').addEventListener('click', openPayment);
 
     const enabledCheckbox = document.getElementById('enabledCheckbox');
     enabledCheckbox.addEventListener('change', () => {
