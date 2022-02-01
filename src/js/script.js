@@ -1,3 +1,4 @@
+
 chrome.runtime.onInstalled.addListener(async () => {
     chrome.alarms.create('forceTeamsAvailability', {
         periodInMinutes: .1
@@ -30,14 +31,15 @@ const runForceAvailability = async function () {
 }
 
 const requestForceAvailability = function () {
-    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow'], async storage => {
+    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow', 'paid'], async storage => {
         let {
             isEnabled,
             statusType,
             requestCount,
             startTime,
             endTime,
-            onlyRunInTimeWindow
+            onlyRunInTimeWindow,
+            paid
         } = storage;
         if (requestCount === undefined) {
             chrome.storage.sync.set({
@@ -53,6 +55,10 @@ const requestForceAvailability = function () {
                 statusType: 'Available'
             }, () => { });
             statusType === 'Available';
+        }
+        if (!paid) {
+            console.log('User does not have an active subscription')
+            return;
         }
 
         if (isEnabled || isEnabled === undefined) {
