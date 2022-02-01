@@ -57,7 +57,7 @@ const requestForceAvailability = function () {
             statusType === 'Available';
         }
         if (!paid) {
-            console.log('User does not have an active subscription')
+            console.log('User does not have an access');
             return;
         }
 
