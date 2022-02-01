@@ -14,11 +14,11 @@ const runGetUserCallBack = function (user) {
     chrome.storage.sync.set({
         paid: user.paid
     }, () => { });
-    const paymentStatusElement = document.getElementById('paymentStatus');
+    const paymentStatusElement = document.getElementById('subHeader');
     if (user.paid) {
-        paymentStatusElement.innerHTML = 'Subscription: active ✅';
+        paymentStatusElement.innerHTML = 'Subscription ✅';
     } else {
-        paymentStatusElement.innerHTML = 'Subscription: inactive ⛔︎';
+        paymentStatusElement.innerHTML = 'Subscription ⛔︎';
     }
 };
 
