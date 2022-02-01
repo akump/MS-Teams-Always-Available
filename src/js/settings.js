@@ -4,19 +4,34 @@ const idToStatus = {
     'StatusCheck2': 'Busy'
 };
 
-
 const openPayment = function () {
     const extpay = ExtPay('microsoft-teams-always-available');
     extpay.openPaymentPage();
 };
 
+const openTrial = function () {
+    const extpay = ExtPay('microsoft-teams-always-available');
+    extpay.openTrialPage('2-day');
+};
+
+const doesUserHaveAccess = function (user) {
+    if (user.paid) return true;
+    const now = new Date();
+    const twoDays = 1000 * 60 * 60 * 24 * 2;
+    if (user.trialStartedAt && (now - user.trialStartedAt) < twoDays) {
+        return true;
+    }
+    return false;
+};
+
 const runGetUserCallBack = function (user) {
+    const access = doesUserHaveAccess(user);
     chrome.storage.sync.set({
-        paid: user.paid
+        paid: access
     }, () => { });
-    const paymentStatusElement = document.getElementById('paymentStatus');
-    if (user.paid) {
-        paymentStatusElement.innerHTML = 'Subscription active ✅';
+    const paymentStatusElement = document.getElementById('subHeader');
+    if (access) {
+        paymentStatusElement.innerHTML = 'Subscription ✅';
     } else {
         paymentStatusElement.innerHTML = 'Subscription Inactive ⛔︎';
     }
@@ -70,6 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePaidStatus();
     document.getElementById('resetCount').addEventListener('click', resetCount);
     document.getElementById('openPayment').addEventListener('click', openPayment);
+    document.getElementById('openTrial').addEventListener('click', openTrial);
+
 
     const enabledCheckbox = document.getElementById('enabledCheckbox');
     enabledCheckbox.addEventListener('change', () => {
