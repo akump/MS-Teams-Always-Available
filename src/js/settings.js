@@ -33,7 +33,7 @@ const runGetUserCallBack = function (user) {
     if (access) {
         paymentStatusElement.innerHTML = 'Subscription ✅';
     } else {
-        paymentStatusElement.innerHTML = 'Subscription Inactive ⛔︎';
+        paymentStatusElement.innerHTML = 'Subscription ⛔︎';
     }
 };
 
