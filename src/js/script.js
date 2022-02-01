@@ -1,7 +1,7 @@
 
 chrome.runtime.onInstalled.addListener(async () => {
     chrome.alarms.create('forceTeamsAvailability', {
-        periodInMinutes: .1
+        periodInMinutes: .5
     });
 });
 
