@@ -87,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('openPayment').addEventListener('click', openPayment);
     document.getElementById('openTrial').addEventListener('click', openTrial);
 
-
     const enabledCheckbox = document.getElementById('enabledCheckbox');
     enabledCheckbox.addEventListener('change', () => {
         const savedTextElement = document.getElementById('saved-text');
