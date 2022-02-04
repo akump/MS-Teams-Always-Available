@@ -1,0 +1,166 @@
+body {
+    background-color: #232323;
+    color: #e8eaed;
+    width: 400px;
+    border: 3px solid #37383a;
+    margin: 0px;
+}
+
+.main-container {
+    padding: 5px 5px 5px 10px;
+}
+
+.header {
+    color: #7B83EB;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#teams-link:link {
+    color: #7B83EB;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#teams-link:visited {
+    color: #7B83EB;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#teams-link:hover {
+    color: #7B83EB;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+#teams-link:active {
+    color: #7B83EB;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+#coffee {
+    margin-bottom: 5px;
+}
+
+.bmc-btn-container {
+    margin-bottom: 15px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #7B83EB;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+#saved-text {
+    margin-left: 5px;
+}
+
+.section {
+    border-bottom: 1px solid rgb(88, 88, 88);
+    padding-bottom: 5px;
+}
+
+.reset-count {
+    background-color: #7B83EB;
+    border: none;
+    color: black;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 0px 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.split-section {
+    display: flex;
+}
+
+
+.split-left {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid rgb(88, 88, 88);
+}
+
+.split-left.large {
+    flex: 1;
+}
+
+.split-left.small {
+    flex: .25;
+}
+
+.split-right {
+    flex: 1;
+}
+
+#timeWindowCheckbox {
+    margin-top: 10px;
+}
+
+#startTimeInput {
+    margin-top: 3px;
+}
+
+#paymentStatus {
+    height: 20px;
+}
