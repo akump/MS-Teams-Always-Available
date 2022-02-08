@@ -164,3 +164,7 @@ input:checked+.slider:before {
 #paymentStatus {
     height: 20px;
 }
+
+.time-input {
+    width: 110px;
+}

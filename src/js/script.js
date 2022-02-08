@@ -16,7 +16,7 @@ const runForceAvailability = async function () {
         'url': 'https://teams.microsoft.com/*'
     }, function (items) {
         for (tab of items) {
-            console.log("tab found: " + tab.url);
+            console.log(`tab found: ${tab.url}`);
             chrome.scripting.executeScript({
                 target: {
                     tabId: tab.id
@@ -47,8 +47,8 @@ const requestForceAvailability = function () {
             }, () => { });
             requestCount = 0;
         }
-        console.log("count: " + requestCount);
-        console.log("status: " + statusType);
+        console.log(`count: ${requestCount}`);
+        console.log(`status: ${statusType}`);
 
         if (!statusType) {
             chrome.storage.sync.set({
@@ -67,13 +67,13 @@ const requestForceAvailability = function () {
             if (onlyRunInTimeWindow && startTime && endTime) {
                 const currentDate = new Date();
                 const startDate = new Date(currentDate.getTime());
-                startDate.setHours(startTime.split(":")[0]);
-                startDate.setMinutes(startTime.split(":")[1]);
+                startDate.setHours(startTime.split(':')[0]);
+                startDate.setMinutes(startTime.split(':')[1]);
                 startDate.setSeconds('00');
 
                 const endDate = new Date(currentDate.getTime());
-                endDate.setHours(endTime.split(":")[0]);
-                endDate.setMinutes(endTime.split(":")[1]);
+                endDate.setHours(endTime.split(':')[0]);
+                endDate.setMinutes(endTime.split(':')[1]);
                 endDate.setSeconds('00');
                 const isBetween = startDate < currentDate && endDate > currentDate;
                 if (!isBetween) {
@@ -86,9 +86,8 @@ const requestForceAvailability = function () {
             }
             try {
                 const latestOid = localStorage['ts.latestOid'];
-                const tokenJSON = localStorage['ts.' + latestOid + '.cache.token.https://presence.teams.microsoft.com/'];
+                const tokenJSON = localStorage[`ts.${latestOid}.cache.token.https://presence.teams.microsoft.com/`];
                 const token = JSON.parse(tokenJSON).token;
-
                 const response = await fetch('https://presence.teams.microsoft.com/v1/me/forceavailability/', {
                     'headers': {
                         'Content-Type': 'application/json',
@@ -97,7 +96,6 @@ const requestForceAvailability = function () {
                     'body': `{"availability":"${statusType}"}`,
                     'method': 'PUT'
                 });
-
                 if (response.ok) {
                     requestCount += 1;
 
@@ -108,7 +106,7 @@ const requestForceAvailability = function () {
                 console.log('MS Teams Always Available:');
                 console.log(response);
             } catch (e) {
-                console.log('MS Teams Always Available: HTTP req failed to /forceavailability: ' + e);
+                console.log(`MS Teams Always Available: HTTP req failed to /forceavailability: ${e}`);
             }
         } else {
             console.log('MS Teams Always Available: currently disabled');

@@ -119,16 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const availableStatusElement = document.getElementById("StatusCheck0");
-    const awayStatusElement = document.getElementById("StatusCheck1");
-    const busyStatusElement = document.getElementById("StatusCheck2");
-    availableStatusElement.addEventListener("click", selectOnlyThis);
-    awayStatusElement.addEventListener("click", selectOnlyThis);
-    busyStatusElement.addEventListener("click", selectOnlyThis);
+    const availableStatusElement = document.getElementById('StatusCheck0');
+    const awayStatusElement = document.getElementById('StatusCheck1');
+    const busyStatusElement = document.getElementById('StatusCheck2');
+    availableStatusElement.addEventListener('click', selectOnlyThis);
+    awayStatusElement.addEventListener('click', selectOnlyThis);
+    busyStatusElement.addEventListener('click', selectOnlyThis);
     chrome.storage.sync.get(['statusType'], async storage => {
-        const {
-            statusType
-        } = storage;
+        const { statusType } = storage;
 
         // handle use case where extension was just installed
         if (statusType === undefined) {
@@ -185,9 +183,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // handle use case where extension was just installed
         if (startTime === undefined) {
             chrome.storage.sync.set({
-                startTime: "08:00"
+                startTime: '08:00'
             }, () => { });
-            startTimeInput.value = "08:00";
+            startTimeInput.value = '08:00';
         } else {
             startTimeInput.value = startTime;
         }
@@ -198,9 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // handle use case where extension was just installed
         if (endTime === undefined) {
             chrome.storage.sync.set({
-                endTime: "17:30"
+                endTime: '17:30'
             }, () => { });
-            endTimeInput.value = "17:30";
+            endTimeInput.value = '17:30';
         } else {
             endTimeInput.value = endTime;
         }
