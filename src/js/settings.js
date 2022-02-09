@@ -26,9 +26,7 @@ const doesUserHaveAccess = function (user) {
 
 const runGetUserCallBack = function (user) {
     const access = doesUserHaveAccess(user);
-    chrome.storage.sync.set({
-        paid: access
-    }, () => { });
+    chrome.storage.sync.set({ paid: access }, () => { });
     const paymentStatusElement = document.getElementById('subHeader');
     if (access) {
         paymentStatusElement.innerHTML = 'Subscription ✅';
@@ -47,21 +45,15 @@ const updatePaidStatus = function () {
 };
 
 const selectOnlyThis = function (e) {
-    for (let i = 0; i <= 2; i++) {
+    for (let i = 0; i <= Object.keys(idToStatus).length - 1; i++) {
         document.getElementById(`StatusCheck${i}`).checked = false;
     }
     document.getElementById(e.currentTarget.id).checked = true;
-    chrome.storage.sync.set({
-        statusType: idToStatus[e.currentTarget.id]
-    }, () => { });
+    chrome.storage.sync.set({ statusType: idToStatus[e.currentTarget.id] }, () => { });
 };
 
 const resetCount = function () {
-    chrome.storage.sync.set({
-        requestCount: 0
-    }, () => {
-        updateRequestCount();
-    });
+    chrome.storage.sync.set({ requestCount: 0 }, () => { updateRequestCount(); });
 };
 
 const updateRequestCount = function () {
@@ -98,21 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 5000);
         }
         queued = true;
-        chrome.storage.sync.set({
-            isEnabled: enabledCheckbox.checked
-        }, () => { });
+        chrome.storage.sync.set({ isEnabled: enabledCheckbox.checked }, () => { });
     });
 
     chrome.storage.sync.get(['isEnabled'], async storage => {
-        const {
-            isEnabled
-        } = storage;
-
+        const { isEnabled } = storage;
         // handle use case where extension was just installed
         if (isEnabled === undefined) {
-            chrome.storage.sync.set({
-                isEnabled: true
-            }, () => { });
+            chrome.storage.sync.set({ isEnabled: true }, () => { });
             enabledCheckbox.checked = true;
         } else {
             enabledCheckbox.checked = isEnabled;
@@ -127,12 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
     busyStatusElement.addEventListener('click', selectOnlyThis);
     chrome.storage.sync.get(['statusType'], async storage => {
         const { statusType } = storage;
-
         // handle use case where extension was just installed
         if (statusType === undefined) {
-            chrome.storage.sync.set({
-                statusType: 'Available'
-            }, () => { });
+            chrome.storage.sync.set({ statusType: 'Available' }, () => { });
             availableStatusElement.checked = true;
         } else {
             if (statusType === 'Available') {
@@ -158,33 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeWindowCheckbox = document.getElementById('timeWindowCheckbox');
     chrome.storage.sync.get(['onlyRunInTimeWindow'], async storage => {
         const { onlyRunInTimeWindow } = storage;
-
         // handle use case where extension was just installed
         if (onlyRunInTimeWindow === undefined) {
-            chrome.storage.sync.set({
-                onlyRunInTimeWindow: false
-            }, () => { });
+            chrome.storage.sync.set({ onlyRunInTimeWindow: false }, () => { });
             timeWindowCheckbox.checked = false;
         } else {
             timeWindowCheckbox.checked = onlyRunInTimeWindow;
         }
     });
     timeWindowCheckbox.addEventListener('change', () => {
-        chrome.storage.sync.set({
-            onlyRunInTimeWindow: timeWindowCheckbox.checked
-        }, () => { });
+        chrome.storage.sync.set({ onlyRunInTimeWindow: timeWindowCheckbox.checked }, () => { });
     });
 
     const startTimeInput = document.getElementById('startTimeInput');
     const endTimeInput = document.getElementById('endTimeInput');
     chrome.storage.sync.get(['startTime'], async storage => {
         const { startTime } = storage;
-
         // handle use case where extension was just installed
         if (startTime === undefined) {
-            chrome.storage.sync.set({
-                startTime: '08:00'
-            }, () => { });
+            chrome.storage.sync.set({ startTime: '08:00' }, () => { });
             startTimeInput.value = '08:00';
         } else {
             startTimeInput.value = startTime;
@@ -192,25 +166,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     chrome.storage.sync.get(['endTime'], async storage => {
         const { endTime } = storage;
-
         // handle use case where extension was just installed
         if (endTime === undefined) {
-            chrome.storage.sync.set({
-                endTime: '17:30'
-            }, () => { });
+            chrome.storage.sync.set({ endTime: '17:30' }, () => { });
             endTimeInput.value = '17:30';
         } else {
             endTimeInput.value = endTime;
         }
     });
     startTimeInput.addEventListener('change', () => {
-        chrome.storage.sync.set({
-            startTime: startTimeInput.value
-        }, () => { });
+        chrome.storage.sync.set({ startTime: startTimeInput.value }, () => { });
     });
     endTimeInput.addEventListener('change', () => {
-        chrome.storage.sync.set({
-            endTime: endTimeInput.value
-        }, () => { });
+        chrome.storage.sync.set({ endTime: endTimeInput.value }, () => { });
     });
 });

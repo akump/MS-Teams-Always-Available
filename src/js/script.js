@@ -1,30 +1,18 @@
+const alarmName = 'forceTeamsAvailability';
 
 chrome.runtime.onInstalled.addListener(async () => {
-    chrome.alarms.create('forceTeamsAvailability', {
-        periodInMinutes: .5
-    });
+    chrome.alarms.create(alarmName, { periodInMinutes: .5 });
 });
 
 chrome.alarms.onAlarm.addListener(alarm => {
-    if (alarm.name === 'forceTeamsAvailability') {
-        runForceAvailability();
-    }
+    if (alarm.name === alarmName) runForceAvailability();
 });
 
 const runForceAvailability = async function () {
-    chrome.tabs.query({
-        'url': 'https://teams.microsoft.com/*'
-    }, function (items) {
+    chrome.tabs.query({ 'url': 'https://teams.microsoft.com/*' }, function (items) {
         for (tab of items) {
             console.log(`tab found: ${tab.url}`);
-            chrome.scripting.executeScript({
-                target: {
-                    tabId: tab.id
-                },
-                function: requestForceAvailability
-            },
-                () => { }
-            );
+            chrome.scripting.executeScript({ target: { tabId: tab.id }, function: requestForceAvailability }, () => { });
             break;
         }
     });
@@ -42,18 +30,14 @@ const requestForceAvailability = function () {
             paid
         } = storage;
         if (requestCount === undefined) {
-            chrome.storage.sync.set({
-                requestCount: 0
-            }, () => { });
+            chrome.storage.sync.set({ requestCount: 0 }, () => { });
             requestCount = 0;
         }
         console.log(`count: ${requestCount}`);
         console.log(`status: ${statusType}`);
 
         if (!statusType) {
-            chrome.storage.sync.set({
-                statusType: 'Available'
-            }, () => { });
+            chrome.storage.sync.set({ statusType: 'Available' }, () => { });
             statusType === 'Available';
         }
         if (!paid) {
@@ -99,9 +83,7 @@ const requestForceAvailability = function () {
                 if (response.ok) {
                     requestCount += 1;
 
-                    chrome.storage.sync.set({
-                        requestCount: requestCount
-                    }, () => { });
+                    chrome.storage.sync.set({ requestCount: requestCount }, () => { });
                 }
                 console.log('MS Teams Always Available:');
                 console.log(response);
