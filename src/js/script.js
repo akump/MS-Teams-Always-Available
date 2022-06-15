@@ -70,7 +70,15 @@ const requestForceAvailability = function () {
             }
             try {
                 const latestOid = localStorage['ts.latestOid'];
+                console.log(`MS Teams Always Available latestOid: ${latestOid}`);
+                if (latestOid === undefined) {
+                    throw 'latestOid undefined'
+                }
                 const tokenJSON = localStorage[`ts.${latestOid}.cache.token.https://presence.teams.microsoft.com/`];
+                console.log(`MS Teams Always Available tokenJSON: ${tokenJSON}`);
+                if (latestOid === undefined) {
+                    throw 'tokenJSON undefined'
+                }
                 const token = JSON.parse(tokenJSON).token;
                 const response = await fetch('https://presence.teams.microsoft.com/v1/me/forceavailability/', {
                     'headers': {
