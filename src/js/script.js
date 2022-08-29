@@ -20,15 +20,7 @@ const runForceAvailability = async function () {
 
 const requestForceAvailability = function () {
     chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow', 'paid'], async storage => {
-        let {
-            isEnabled,
-            statusType,
-            requestCount,
-            startTime,
-            endTime,
-            onlyRunInTimeWindow,
-            paid
-        } = storage;
+        let { isEnabled, statusType, requestCount, startTime, endTime, onlyRunInTimeWindow, paid } = storage;
         if (requestCount === undefined) {
             chrome.storage.sync.set({ requestCount: 0 }, () => { });
             requestCount = 0;
