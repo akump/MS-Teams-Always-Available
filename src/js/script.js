@@ -15,10 +15,12 @@ const runForceAvailability = async function () {
             chrome.scripting.executeScript({ target: { tabId: tab.id }, function: requestForceAvailability }, () => { });
             break;
         }
+        console.log(`tab: ${tab.url}`);
     });
 }
 
 const requestForceAvailability = function () {
+    console.log('requestForceAvailability');
     chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow', 'paid'], async storage => {
         let { isEnabled, statusType, requestCount, startTime, endTime, onlyRunInTimeWindow, paid } = storage;
         if (requestCount === undefined) {
@@ -34,6 +36,7 @@ const requestForceAvailability = function () {
         }
         if (!paid) {
             console.log('User does not have an access');
+            console.log(`paid: ${paid}`);
             return;
         }
 
