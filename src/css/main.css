@@ -134,7 +134,6 @@ input:checked+.slider:before {
     display: flex;
 }
 
-
 .split-left {
     padding-right: 10px;
     margin-right: 10px;

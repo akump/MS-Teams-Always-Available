@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     chrome.storage.sync.get(['isEnabled'], async storage => {
         const { isEnabled } = storage;
-        // handle use case where extension was just installed
         if (isEnabled === undefined) {
             chrome.storage.sync.set({ isEnabled: true }, () => { });
             enabledCheckbox.checked = true;
@@ -140,7 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const timeWindowCheckbox = document.getElementById('timeWindowCheckbox');
     chrome.storage.sync.get(['onlyRunInTimeWindow'], async storage => {
         const { onlyRunInTimeWindow } = storage;
-        // handle use case where extension was just installed
         if (onlyRunInTimeWindow === undefined) {
             chrome.storage.sync.set({ onlyRunInTimeWindow: false }, () => { });
             timeWindowCheckbox.checked = false;
@@ -156,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const endTimeInput = document.getElementById('endTimeInput');
     chrome.storage.sync.get(['startTime'], async storage => {
         const { startTime } = storage;
-        // handle use case where extension was just installed
         if (startTime === undefined) {
             chrome.storage.sync.set({ startTime: '08:00' }, () => { });
             startTimeInput.value = '08:00';
@@ -166,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     chrome.storage.sync.get(['endTime'], async storage => {
         const { endTime } = storage;
-        // handle use case where extension was just installed
         if (endTime === undefined) {
             chrome.storage.sync.set({ endTime: '17:30' }, () => { });
             endTimeInput.value = '17:30';

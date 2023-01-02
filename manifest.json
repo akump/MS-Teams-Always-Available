@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Microsoft Teams: Always Available",
-    "version": "1.2.6",
+    "version": "1.3.0",
     "description": "A Chrome extension that keeps you available on teams 24/7",
     "background": {
         "service_worker": "background.js"
@@ -17,9 +17,11 @@
         "storage",
         "alarms",
         "tabs",
-        "scripting"
+        "scripting",
+        "webRequest"
     ],
     "host_permissions": [
-        "https://*.teams.microsoft.com/*"
+        "https://*.teams.microsoft.com/*",
+        "https://*.teams.microsoft.com.mcas.ms/*"
     ]
 }

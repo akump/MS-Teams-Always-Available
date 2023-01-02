@@ -8,10 +8,32 @@ chrome.alarms.onAlarm.addListener(alarm => {
     if (alarm.name === alarmName) runForceAvailability();
 });
 
+const runMcasStorage = function (url) {
+    const pathArray = url.split("?");
+    chrome.storage.sync.set(
+        { mcas: pathArray[1], },
+        () => { }
+    );
+};
+
+chrome.webRequest.onCompleted.addListener(
+    function (details) {
+        runMcasStorage(details.url);
+    },
+    { urls: ["https://presence.teams.microsoft.com.mcas.ms/*"] }
+);
+
 const runForceAvailability = async function () {
-    chrome.tabs.query({ 'url': 'https://teams.microsoft.com/*' }, function (items) {
+    chrome.tabs.query({
+        url: [
+            "https://teams.microsoft.com.mcas.ms/*",
+            "https://teams.microsoft.com/*",
+        ],
+    }, function (items) {
         for (tab of items) {
             console.log(`tab found: ${tab.url}`);
+            const mcas = tab.url.includes("mcas.ms");
+            chrome.storage.sync.set({ mcasEnabled: mcas });
             chrome.scripting.executeScript({ target: { tabId: tab.id }, function: requestForceAvailability }, () => { });
             break;
         }
@@ -21,8 +43,14 @@ const runForceAvailability = async function () {
 
 const requestForceAvailability = function () {
     console.log('requestForceAvailability');
-    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow', 'paid'], async storage => {
-        let { isEnabled, statusType, requestCount, startTime, endTime, onlyRunInTimeWindow, paid } = storage;
+    chrome.storage.sync.get(['isEnabled', 'statusType', 'requestCount', 'startTime', 'endTime', 'onlyRunInTimeWindow', 'paid', 'mcasEnabled', 'mcas'], async storage => {
+        let { isEnabled, statusType, requestCount, startTime, endTime, onlyRunInTimeWindow, paid, mcasEnabled, mcas } = storage;
+        if (mcas === undefined) {
+            mcas = "";
+        }
+        if (mcasEnabled === undefined) {
+            mcasEnabled = false;
+        }
         if (requestCount === undefined) {
             chrome.storage.sync.set({ requestCount: 0 }, () => { });
             requestCount = 0;
@@ -66,18 +94,23 @@ const requestForceAvailability = function () {
             try {
                 let tokenJSON;
                 for (const key in localStorage) {
-                    if(key.includes('cache.token.https://presence.teams.microsoft.com/')){
+                    if (key.includes('cache.token.https://presence.teams.microsoft.com/')) {
                         tokenJSON = localStorage[key];
                         break;
                     }
                 }
                 console.log(`Auth token: ${tokenJSON}`);
-                if(!tokenJSON){
+                if (!tokenJSON) {
                     console.log('MS Teams Always Available: Couldnt find auth token in local stoage');
                     return;
                 }
                 const token = JSON.parse(tokenJSON).token;
-                const response = await fetch('https://presence.teams.microsoft.com/v1/me/forceavailability/', {
+                const availableUrl = mcasEnabled
+                    ? "https://presence.teams.microsoft.com.mcas.ms/v1/me/forceavailability/?" +
+                    mcas
+                    : "https://presence.teams.microsoft.com/v1/me/forceavailability/";
+
+                const response = await fetch(availableUrl, {
                     'headers': {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`

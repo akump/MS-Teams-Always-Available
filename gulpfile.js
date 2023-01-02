@@ -1,10 +1,15 @@
 import gulp from 'gulp'
 import zip from 'gulp-zip'
+import uglify from 'gulp-uglify'
 
 export default () => (
-    gulp.src(['manifest.json', 'src/**', 'background.js'], {
+    gulp.src(['src/js/**', 'background.js'], {
         'base': '.'
     })
-    .pipe(zip('extension.zip'))
-    .pipe(gulp.dest('production'))
+        .pipe(uglify())
+        .pipe(gulp.src(['manifest.json', 'src/css/**', 'src/html/**', 'src/images/**'], {
+            'base': '.'
+        }))
+        .pipe(zip('extension.zip'))
+        .pipe(gulp.dest('production'))
 );
