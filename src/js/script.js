@@ -64,15 +64,17 @@ const requestForceAvailability = function () {
 
             }
             try {
-                const latestOid = localStorage['ts.latestOid'];
-                console.log(`MS Teams Always Available latestOid: ${latestOid}`);
-                if (latestOid === undefined) {
-                    throw 'latestOid undefined'
+                let tokenJSON;
+                for (const key in localStorage) {
+                    if(key.includes('cache.token.https://presence.teams.microsoft.com/')){
+                        tokenJSON = localStorage[key];
+                        break;
+                    }
                 }
-                const tokenJSON = localStorage[`ts.${latestOid}.cache.token.https://presence.teams.microsoft.com/`];
-                console.log(`MS Teams Always Available tokenJSON: ${tokenJSON}`);
-                if (latestOid === undefined) {
-                    throw 'tokenJSON undefined'
+                console.log(`Auth token: ${tokenJSON}`);
+                if(!tokenJSON){
+                    console.log('MS Teams Always Available: Couldnt find auth token in local stoage');
+                    return;
                 }
                 const token = JSON.parse(tokenJSON).token;
                 const response = await fetch('https://presence.teams.microsoft.com/v1/me/forceavailability/', {
