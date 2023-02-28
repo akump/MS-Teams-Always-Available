@@ -68,7 +68,7 @@ const updateRequestCount = function () {
     });
 };
 
-setInterval(updateRequestCount, 10 * 1000);
+setInterval(updateRequestCount, 3 * 1000);
 
 let queued = false;
 

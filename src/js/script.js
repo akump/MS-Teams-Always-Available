@@ -37,7 +37,6 @@ const runForceAvailability = async function () {
             chrome.scripting.executeScript({ target: { tabId: tab.id }, function: requestForceAvailability }, () => { });
             break;
         }
-        console.log(`tab: ${tab.url}`);
     });
 }
 
@@ -62,7 +61,7 @@ const requestForceAvailability = function () {
             chrome.storage.sync.set({ statusType: 'Available' }, () => { });
             statusType === 'Available';
         }
-        if (!paid) {
+        if (paid !== true) {
             console.log('User does not have an access');
             console.log(`paid: ${paid}`);
             return;
