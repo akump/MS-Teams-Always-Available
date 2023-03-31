@@ -48,7 +48,7 @@ const requestForceAvailability = function () {
             mcas = "";
         }
         if (mcasEnabled === undefined) {
-            mcasEnabled = false;
+            mcasEnabled = false
         }
         if (requestCount === undefined) {
             chrome.storage.sync.set({ requestCount: 0 }, () => { });
