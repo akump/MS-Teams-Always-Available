@@ -1,7 +1,7 @@
 const alarmName = 'forceTeamsAvailability';
 
 chrome.runtime.onInstalled.addListener(async () => {
-  chrome.alarms.create(alarmName, {periodInMinutes: 0.25});
+  chrome.alarms.create(alarmName, {periodInMinutes: 0.5});
 });
 
 chrome.alarms.onAlarm.addListener(alarm => {
