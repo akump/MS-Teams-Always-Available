@@ -11,13 +11,13 @@ const openPayment = function() {
 
 const openTrial = function() {
   const extpay = ExtPay('microsoft-teams-always-available');
-  extpay.openTrialPage('1-day');
+  extpay.openTrialPage('2-day');
 };
 
 const doesUserHaveAccess = function(user) {
   if (user.paid) return true;
   const now = new Date();
-  const oneDay = 1000 * 60 * 60 * 24 * 1;
+  const oneDay = 1000 * 60 * 60 * 24 * 2;
   if (user.trialStartedAt && now - user.trialStartedAt < oneDay) {
     return true;
   }
@@ -43,7 +43,7 @@ const updatePaidStatus = function() {
       runGetUserCallBack(user);
     })
     .catch(() => {
-      console.log('No user found');
+      console.log('Couldnt get user');
     });
 };
 
