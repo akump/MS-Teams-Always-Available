@@ -11,13 +11,12 @@
   <body>
     <div class="main-container">
       <div class="section">
-        <h2 class="header">MS Teams: Always Available v1.3.4</h2>
+        <h2 class="header">MS Teams: Always Available v1.3.5</h2>
         <span
-          >This Chrome extension works by calling Microsoft's servers every 30 seconds. As long as
-          you have a Chrome tab open and are logged into
+          >Simply login to
           <a id="teams-link" href="https://teams.microsoft.com" target="_blank"
             >https://teams.microsoft.com</a
-          >, you will remain available.</span
+          ></span
         >
       </div>
 
@@ -75,8 +74,7 @@
         <span
           >You can choose to only run the extension in a certain time window. For example, if you
           only work from 8am - 4pm, input those times below and the extension will only work between
-          those times. This allows full automation of your availability. Otherwise, have this value
-          unselected and the extension will work as normal.
+          those times. Otherwise, have this value unselected and the extension will work as normal.
         </span>
         <br />
         <input type="checkbox" class="option-checkbox" id="timeWindowCheckbox" value="Value1" />
@@ -95,7 +93,11 @@
         <span> Forced availability count: <span id="count"></span></span>
         <button class="reset-count" id="resetCount">Reset count</button>
         <br />
-        <span> Note: This count should go up once every ~30 seconds.</span>
+        <span>
+          Note: This count should go up once every ~30 seconds. If count isn't going up, go to
+          chrome://extensions/ in Chrome. Then, disabled and reenable the extension and refresh
+          Teams.</span
+        >
       </div>
     </div>
   </body>
