@@ -27,7 +27,9 @@ const runForceAvailability = function() {
       url: ['https://teams.microsoft.com.mcas.ms/*', 'https://teams.microsoft.com/*'],
     },
     function(items) {
+      let found = false;
       for (tab of items) {
+        found = true;
         console.log(`tab found: ${tab.url}`);
         const mcas = tab.url.includes('mcas.ms');
         chrome.storage.sync.set({mcasEnabled: mcas});
@@ -37,7 +39,9 @@ const runForceAvailability = function() {
         );
         break;
       }
-      console.log('tab not found');
+      if (!found) {
+        console.log('Tab not found');
+      }
     }
   );
 };

@@ -7,11 +7,12 @@ body {
 }
 
 .main-container {
-  padding: 5px 5px 5px 10px;
+  padding: 5px 10px 5px 10px;
 }
 
 .header {
   color: #7b83eb;
+  border-bottom: 1px solid rgb(88, 88, 88);
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -112,11 +113,10 @@ input:checked + .slider:before {
 }
 
 .section {
-  border-bottom: 1px solid rgb(88, 88, 88);
   padding-bottom: 5px;
 }
 
-.reset-count {
+.button {
   background-color: #7b83eb;
   border: none;
   color: black;
@@ -128,6 +128,7 @@ input:checked + .slider:before {
   margin: 4px 0px 4px 4px;
   cursor: pointer;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .split-section {
@@ -152,14 +153,30 @@ input:checked + .slider:before {
   flex: 1;
 }
 
-#timeWindowCheckbox {
-  margin-top: 10px;
-}
-
 #startTimeInput {
   margin-top: 3px;
 }
 
 .time-input {
   width: 110px;
+}
+
+td,
+th {
+  border: 1px solid rgb(88, 88, 88);
+  padding: 8px;
+}
+
+.center {
+  margin: 0 auto;
+  display: block;
+  width: 60px;
+}
+
+table {
+  width: 100%;
+}
+
+table {
+  border-spacing: 0px;
 }
