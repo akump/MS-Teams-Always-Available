@@ -7,7 +7,7 @@ body {
 }
 
 .main-container {
-  padding: 5px 10px 5px 10px;
+  padding: 0px 10px 5px 10px;
 }
 
 .header {
@@ -113,7 +113,7 @@ input:checked + .slider:before {
 }
 
 .section {
-  padding-bottom: 5px;
+  padding-bottom: 2.5px;
 }
 
 .button {
@@ -179,4 +179,10 @@ table {
 
 table {
   border-spacing: 0px;
+}
+
+#resetCount {
+  position: absolute;
+  right: 15px;
+  bottom: 25px;
 }

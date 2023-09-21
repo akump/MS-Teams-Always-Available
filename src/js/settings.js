@@ -61,19 +61,25 @@ const selectOnlyThis = function(e) {
 };
 
 const resetCount = function() {
-  chrome.storage.sync.set({requestCount: 0}, () => {
+  chrome.storage.sync.set({requestCount: 0, lastUpdatedDate: ''}, () => {
     updateRequestCount();
   });
 };
 
 const updateRequestCount = function() {
-  chrome.storage.sync.get(['requestCount'], function(storage) {
-    const {requestCount} = storage;
+  chrome.storage.sync.get(['requestCount', 'lastUpdatedDate'], function(storage) {
+    const {requestCount, lastUpdatedDate} = storage;
     const countElement = document.getElementById('count');
     if (requestCount) {
       countElement.innerHTML = requestCount;
     } else {
       countElement.innerHTML = 0;
+    }
+    const lastUpdatedDateElement = document.getElementById('lastUpdatedDate');
+    if (lastUpdatedDate) {
+      lastUpdatedDateElement.innerHTML = lastUpdatedDate;
+    } else {
+      lastUpdatedDateElement.innerHTML = '';
     }
   });
 };

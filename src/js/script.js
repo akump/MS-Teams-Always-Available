@@ -59,6 +59,7 @@ const requestForceAvailability = function() {
       'paid',
       'mcasEnabled',
       'mcas',
+      'lastUpdatedDate',
     ],
     async storage => {
       let {
@@ -71,6 +72,7 @@ const requestForceAvailability = function() {
         paid,
         mcasEnabled,
         mcas,
+        lastUpdatedDate,
       } = storage;
       if (mcas === undefined) {
         mcas = '';
@@ -81,6 +83,10 @@ const requestForceAvailability = function() {
       if (requestCount === undefined) {
         chrome.storage.sync.set({requestCount: 0}, () => {});
         requestCount = 0;
+      }
+      if (requestCount === undefined) {
+        chrome.storage.sync.set({lastUpdatedDate: ''}, () => {});
+        lastUpdatedDate = '';
       }
       console.log(`count: ${requestCount}`);
       console.log(`status: ${statusType}`);
@@ -149,8 +155,9 @@ const requestForceAvailability = function() {
           });
           if (response.ok) {
             requestCount += 1;
-
+            lastUpdatedDate = new Date().toLocaleString();
             chrome.storage.sync.set({requestCount: requestCount}, () => {});
+            chrome.storage.sync.set({lastUpdatedDate: lastUpdatedDate}, () => {});
           }
           console.log('MS Teams Always Available:');
           console.log(response);

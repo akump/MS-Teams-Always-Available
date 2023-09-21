@@ -7,11 +7,10 @@
     <script src="../js/ExtPay.js"></script>
     <link rel="stylesheet" href="../css/main.css" />
   </head>
-
   <body>
     <div class="main-container">
       <div class="section">
-        <h2 class="header">MS Teams: Always Available v1.4.0</h2>
+        <h2 class="header">MS Teams: Always Available v1.5.0</h2>
         <span
           >Simply login to
           <a id="teams-link" href="https://teams.microsoft.com" target="_blank"
@@ -29,7 +28,7 @@
           Subscription
         </h2>
         <div>
-          <div style="margin: 10px 0;">
+          <div style="margin: 5px 0;">
             Choose the subscription that's right for you. Reload this settings popup after modifying
             your subscription.
           </div>
@@ -118,10 +117,10 @@
       </div>
       <div>
         <h2 class="header" style="margin-bottom: 0px;">Is the extension working?</h2>
-        <span> Forced availability count: <span id="count"></span></span>
-        <button class="button" id="resetCount">Reset count</button>
-        <br />
-        <span> Note: This count should go up once every ~30 seconds</span>
+        <div style="margin: 5px 0;">Forced availability count: <span id="count"></span></div>
+        <div style="margin: 5px 0;">Last updated at: <span id="lastUpdatedDate"></span></div>
+        <button class="button" id="resetCount">Reset</button>
+        <div>Note: This count should go up once every ~30 seconds</div>
       </div>
     </div>
   </body>

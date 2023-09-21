@@ -1,6 +1,6 @@
 {
     "name": "ms-teams-always-available",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "A Chrome extension that keeps you available on teams 24/7",
     "repository": {
         "type": "git",
