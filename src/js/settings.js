@@ -14,11 +14,6 @@ const openTrial = function() {
   extpay.openTrialPage('2-day');
 };
 
-const openLogin = function() {
-  const extpay = ExtPay('microsoft-teams-always-available');
-  extpay.openLoginPage();
-};
-
 const doesUserHaveAccess = function(user) {
   if (user.paid) return true;
   const now = new Date();
@@ -94,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('resetCount').addEventListener('click', resetCount);
   document.getElementById('openPayment').addEventListener('click', openPayment);
   document.getElementById('openTrial').addEventListener('click', openTrial);
-  document.getElementById('openLogin').addEventListener('click', openLogin);
 
   const enabledCheckbox = document.getElementById('enabledCheckbox');
   enabledCheckbox.addEventListener('change', () => {
