@@ -4,49 +4,6 @@ const idToStatus = {
   StatusCheck2: 'Busy',
 };
 
-const openPayment = function() {
-  const extpay = ExtPay('microsoft-teams-always-available');
-  extpay.openPaymentPage();
-};
-
-const openTrial = function() {
-  const extpay = ExtPay('microsoft-teams-always-available');
-  extpay.openTrialPage('2-day');
-};
-
-const doesUserHaveAccess = function(user) {
-  if (user.paid) return true;
-  const now = new Date();
-  const oneDay = 1000 * 60 * 60 * 24 * 2;
-  if (user.trialStartedAt && now - user.trialStartedAt < oneDay) {
-    return true;
-  }
-  return false;
-};
-
-const runGetUserCallBack = function(user) {
-  const access = doesUserHaveAccess(user);
-  chrome.storage.sync.set({paid: access}, () => {});
-  const paymentStatusElement = document.getElementById('subHeader');
-  if (access) {
-    paymentStatusElement.innerHTML = 'Subscription ✅';
-  } else {
-    paymentStatusElement.innerHTML = 'Subscription ⛔︎';
-  }
-};
-
-const updatePaidStatus = function() {
-  const extpay = ExtPay('microsoft-teams-always-available');
-  extpay
-    .getUser()
-    .then(user => {
-      runGetUserCallBack(user);
-    })
-    .catch(() => {
-      console.log('Couldnt get user');
-    });
-};
-
 const selectOnlyThis = function(e) {
   for (let i = 0; i <= Object.keys(idToStatus).length - 1; i++) {
     document.getElementById(`StatusCheck${i}`).checked = false;
@@ -85,10 +42,7 @@ let queued = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   updateRequestCount();
-  updatePaidStatus();
   document.getElementById('resetCount').addEventListener('click', resetCount);
-  document.getElementById('openPayment').addEventListener('click', openPayment);
-  document.getElementById('openTrial').addEventListener('click', openTrial);
 
   const enabledCheckbox = document.getElementById('enabledCheckbox');
   enabledCheckbox.addEventListener('change', () => {
@@ -122,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   busyStatusElement.addEventListener('click', selectOnlyThis);
   chrome.storage.sync.get(['statusType'], async storage => {
     const {statusType} = storage;
-    // handle use case where extension was just installed
+    // Handle use case where extension was just installed
     if (statusType === undefined) {
       chrome.storage.sync.set({statusType: 'Available'}, () => {});
       availableStatusElement.checked = true;

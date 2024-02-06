@@ -56,7 +56,6 @@ const requestForceAvailability = function() {
       'startTime',
       'endTime',
       'onlyRunInTimeWindow',
-      'paid',
       'mcasEnabled',
       'mcas',
       'lastUpdatedDate',
@@ -69,7 +68,6 @@ const requestForceAvailability = function() {
         startTime,
         endTime,
         onlyRunInTimeWindow,
-        paid,
         mcasEnabled,
         mcas,
         lastUpdatedDate,
@@ -94,11 +92,6 @@ const requestForceAvailability = function() {
       if (!statusType) {
         chrome.storage.sync.set({statusType: 'Available'}, () => {});
         statusType === 'Available';
-      }
-      if (paid !== true) {
-        console.log('User does not have an access');
-        console.log(`paid: ${paid}`);
-        return;
       }
 
       if (isEnabled || isEnabled === undefined) {
